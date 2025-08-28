@@ -1,0 +1,9 @@
+{
+  "name": "asteroid.io",
+  "version": "1.0.0",
+  "description": "My playground for learning some js, node and browser stuff.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
