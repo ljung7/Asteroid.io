@@ -41,6 +41,9 @@ Asteroidio.Game.prototype.createPlayer = function() {
     this.player = new Asteroidio.Ship();
     this.player.setControls('W','A','S','D');
     this.scene.add( this.player.mesh );
+
+    this.enemy = new Asteroidio.Ship();
+    this.scene.add(this.enemy.mesh);
 }
 
 Asteroidio.Game.prototype.createRenderer = function() {
