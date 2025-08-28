@@ -1,30 +1,23 @@
-var express = require('express'),
- app = express(), 
- port = 80,
- server = app.listen(port),
- io = require('socket.io').listen(server);
- io.set('log level', 0)
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+const port = 80;
+
+app.use(express.static(__dirname + '/public'));
 
 app.get("/", function(req, res) {
   res.redirect("/index.html");
 });
 
-app.configure(function(){
-  app.use(express.methodOverride());
-  app.use(express.bodyParser());
-  app.use(express.static(__dirname + '/public'));
-  app.use(express.errorHandler({
-    dumpExceptions: true, 
-    showStack: true
-  }));
-  app.use(app.router);
-});
-
-
-io.sockets.on('connection', function (socket) {
-  socket.on('playerstate', function (state) {
-    socket.broadcast.emit('gamestate', state);  
+io.on('connection', (socket) => {
+  socket.on('playerstate', (state) => {
+    socket.broadcast.emit('gamestate', state);
   });
 });
 
-console.log("Server is listening on port " + port);
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});

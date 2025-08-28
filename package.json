@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "My playground for learning some js, node and browser stuff.",
   "main": "server.js",
+  "dependencies": {
+    "express": "*",
+    "socket.io": "*"
+  },
   "scripts": {
     "start": "node server.js"
   }
